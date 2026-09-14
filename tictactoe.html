@@ -45,10 +45,12 @@
         <div class="cell" data-index="7"></div>
         <div class="cell" data-index="8"></div>
     </div>
+    <button id="restart" style="display: block; margin: 20px auto; padding: 10px 20px; font-size: 16px; cursor: pointer;">Играть заново</button>
     <script>
         let currentPlayer = 'X';
         let gameActive = true;
         const cells = document.querySelectorAll('.cell');
+        const restartButton = document.getElementById('restart');
         const winConditions = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8], // горизонтали
             [0, 3, 6], [1, 4, 7], [2, 5, 8], // вертикали
@@ -67,6 +69,12 @@
             return null;
         }
 
+        function resetGame() {
+            currentPlayer = 'X';
+            gameActive = true;
+            cells.forEach(cell => cell.textContent = '');
+        }
+
         cells.forEach(cell => {
             cell.addEventListener('click', () => {
                 if (cell.textContent === '' && gameActive) {
@@ -81,6 +89,8 @@
                 }
             });
         });
+
+        restartButton.addEventListener('click', resetGame);
     </script>
 </body>
 </html>
